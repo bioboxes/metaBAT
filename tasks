@@ -1,0 +1,1 @@
+default: runMetaBat.sh "$FASTA_PATH" ${BAM_FILES[@]}
