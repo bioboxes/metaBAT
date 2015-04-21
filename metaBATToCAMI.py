@@ -26,8 +26,8 @@ def fasta_iter(fasta_name):
 
 def metabat_to_cami(input_path,prefix,suffix,output_path):
      f = open(output_path, 'w')
-     f.write('@Version:0.9.0')
-     f.write('@SampleId:SampleID')
+     f.write('@Version:0.9.0\n')
+     f.write('@SampleId:SampleID\n')
      f.write('@@SEQUENCEID\tBINID\n')   
      for file in os.listdir(input_path):
         m = re.findall (prefix+'(.*?)'+suffix, file, re.DOTALL)

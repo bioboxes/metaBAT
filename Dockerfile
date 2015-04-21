@@ -21,3 +21,4 @@ COPY run.sh /usr/local/bin/
 COPY unshuffle_fastq.pl /usr/local/bin/
 COPY metaBATToCAMI.py /usr/local/bin/
 COPY tasks /
+ENTRYPOINT ["/usr/local/bin/run.sh"]
