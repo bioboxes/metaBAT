@@ -2,15 +2,33 @@ FROM ubuntu:latest
 MAINTAINER Bioboxes
 
 RUN apt-get update && apt-get install -y software-properties-common
-RUN apt-get install -y python
-RUN apt-get install -y bowtie2
-RUN apt-get install -y samtools
-RUN apt-get install -y wget
+RUN apt-get install -y python bowtie2 samtools wget
+
+# Locations for biobox validator
+ENV BASE_URL  https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
+ENV VERSION   0.x.y
+ENV VALIDATOR /bbx/validator/
+RUN sudo mkdir -p  ${VALIDATOR} && sudo chmod -R a+wx  /bbx
 
 # install yaml2json and jq tools
 ENV CONVERT https://github.com/bronze1man/yaml2json/raw/master/builds/linux_386/yaml2json
 RUN cd /usr/local/bin && sudo wget --quiet ${CONVERT} && sudo chmod a+x /usr/local/bin/yaml2json
 RUN sudo apt-get install jq
+
+# Install the biobox file validator
+RUN sudo wget \
+      --quiet \
+      --output-document -\
+      ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
+    | sudo tar xJf - \
+      --directory ${VALIDATOR} \
+      --strip-components=1
+ENV PATH ${PATH}:${VALIDATOR}
+
+# add schema, tasks, run scripts
+ADD run.sh /usr/local/bin/run
+ADD schema.yaml ${VALIDATOR}
+ADD tasks /
 
 #install metabat
 RUN sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
