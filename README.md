@@ -9,7 +9,7 @@
 sudo docker run -v /path/to/test.yaml:/bbx/input/biobox.yaml:rw  \
 -v /path/to/fastq/test.fq.gz:/test1/reads.fastq.gz:ro  \
 -v /path/to/fasta/test.fna:/bbx/input/test.fna:ro      \
--v /path/to/output:/bbx/output:rw  metabat default     \
+-v /path/to/output:/bbx/output:rw  metabat default     
 ```
 
 ### Input yaml Example:
