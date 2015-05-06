@@ -28,15 +28,14 @@ ENV PATH ${PATH}:${VALIDATOR}
 # add schema, tasks, run scripts
 ADD run.sh /usr/local/bin/run
 ADD schema.yaml ${VALIDATOR}
-ADD tasks /
+ADD Taskfile /
+ADD run.sh /usr/local/bin/
+ADD unshuffle_fastq.pl /usr/local/bin/
+ADD metaBATToCAMI.py /usr/local/bin/
 
 #install metabat
 RUN sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
 RUN apt-get update
 RUN apt-get install -y scons libboost-all-dev g++ libz-dev libncurses5-dev libbam-dev
 RUN wget --output-document - https://bitbucket.org/berkeleylab/metabat/downloads/metabat-static-binary-linux-x64_v0.25.4.tar.gz  | tar xzf - --directory /usr/local/bin  --strip-components=1
-ADD run.sh /usr/local/bin/
-ADD unshuffle_fastq.pl /usr/local/bin/
-ADD metaBATToCAMI.py /usr/local/bin/
-ADD tasks /
 ENTRYPOINT ["/usr/local/bin/run.sh"]
