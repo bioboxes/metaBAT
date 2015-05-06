@@ -67,7 +67,7 @@ do
          echo "run samtools"
          samtools index $OUTPREFIX.bam
          samtools flagstat $OUTPREFIX.bam > $OUTPREFIX.bam.flagstat
-         BAM_FILES[$COUNTER]=${TMP_DIR}$OUTPREFIX.bam
+         BAM_FILES[$COUNTER]=${TMP_DIR}/$OUTPREFIX.bam
 done
 
 FASTA_NAME=ALL_FASTA.fna
