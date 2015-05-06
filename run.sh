@@ -42,7 +42,7 @@ for ((COUNTER=0; COUNTER <$LENGTH; COUNTER++))
 do
 
          #fastq_gz
-	 FASTQ_GZ=$( echo "$FASTQS" | jq --arg COUNTER "$COUNTER"  --raw-output '.['$COUNTER'].value' | tr '\n'' ')
+	 FASTQ_GZ=$( echo "$FASTQS" | jq --arg COUNTER "$COUNTER"  --raw-output '.['$COUNTER'].value' | tr '\n' ' ')
         
          #paired or single fastq
 	 TYPE=$( echo "$FASTQS" | jq --arg COUNTER "$COUNTER"  --raw-output '.['$COUNTER'].type' | tr '\n' ' ')
