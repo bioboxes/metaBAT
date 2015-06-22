@@ -31,11 +31,11 @@ RUN sudo wget \
 ENV PATH ${PATH}:${VALIDATOR}
 
 # add schema, tasks, run scripts
-ADD run.sh /usr/local/bin/run
 ADD schema.yaml ${VALIDATOR}
 ADD Taskfile /
 ADD run.sh /usr/local/bin/
 ADD unshuffle_fastq.pl /usr/local/bin/
 ADD metaBATToCAMI.py /usr/local/bin/
+RUN cd /usr/local/bin && chmod 700 unshuffle_fastq.pl metaBATToCAMI.py run.sh  
 
 ENTRYPOINT ["/usr/local/bin/run.sh"]
