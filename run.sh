@@ -6,6 +6,7 @@ set -o nounset
 TASK=$1
 OUTPUT=/bbx/output/bbx
 INPUT=/bbx/input/biobox.yaml
+METADATA=/bbx/metadata
 
 mkdir -p $OUTPUT
 
@@ -75,6 +76,12 @@ FASTA_PATH=$TMP_DIR/${FASTA_NAME}
 OUTPUT_FILE=${OUTPUT}/out.binning
 touch ${OUTPUT_FILE}
 cat $CONTIGS > $FASTA_PATH
+
+
+# if /bbx/metadata is mounted create log.txt
+if [ -d "$METADATA" ]; then
+  CMD="($CMD) >& $METADATA/log.txt"
+fi
 
 #run task
 echo "run task"
